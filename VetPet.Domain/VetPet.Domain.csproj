@@ -44,6 +44,9 @@
     <Compile Include="PetModule\Aggregate\PetAgg\IPetRepository.cs" />
     <Compile Include="PetModule\Aggregate\PetAgg\Pet.cs" />
     <Compile Include="PetModule\Aggregate\PetAgg\PetSpecifications.cs" />
+    <Compile Include="PetModule\Aggregate\PetAgg\PetTask.cs" />
+    <Compile Include="PetModule\Aggregate\TaskAgg\ITaskRepository.cs" />
+    <Compile Include="PetModule\Aggregate\TaskAgg\Task.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

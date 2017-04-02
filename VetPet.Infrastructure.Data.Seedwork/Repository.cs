@@ -188,7 +188,7 @@
 
         #region Private Methods
 
-        IDbSet<TEntity> GetSet()
+        public IDbSet<TEntity> GetSet()
         {
             return  _UnitOfWork.CreateSet<TEntity>();
         }

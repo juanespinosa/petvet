@@ -2,6 +2,7 @@
 {
     using Seedwork;
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
     public class Pet : Entity
@@ -27,5 +28,20 @@
         public string Gender { get; set; }
         [Required]
         public Guid CustomerId { get; set; }
+
+        private HashSet<PetTask> _petTasks;
+        public virtual ICollection<PetTask> PetTasks
+        {
+            get
+            {
+                if (_petTasks == null)
+                    _petTasks = new HashSet<PetTask>();
+                return _petTasks;
+            }
+            set
+            {
+                _petTasks = new HashSet<PetTask>(value);
+            }
+        }
     }
 }

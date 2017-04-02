@@ -44,6 +44,7 @@
                     @Html.DisplayFor(modelItem => item.Gender)
                 </td>
                 <td>
+                    @Html.ActionLink("Tareas", "Index", "PetTasks", new { petid = item.Id }, new { }) |
                     @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
                     @Html.ActionLink("Eliminar", "Delete", new { id = item.Id })
                 </td>

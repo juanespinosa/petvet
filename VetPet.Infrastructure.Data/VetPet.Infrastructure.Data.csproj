@@ -57,11 +57,17 @@
     <Compile Include="Migrations\201704020027197_ChangeGenderLength.Designer.cs">
       <DependentUpon>201704020027197_ChangeGenderLength.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201704020226424_AddPetTasks.cs" />
+    <Compile Include="Migrations\201704020226424_AddPetTasks.Designer.cs">
+      <DependentUpon>201704020226424_AddPetTasks.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="PetModule\PetRepository.cs" />
+    <Compile Include="PetModule\TaskRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UnitOfWork\MainBCUnitOfWork.cs" />
     <Compile Include="UnitOfWork\Mappings\PetEntityTypeConfiguration.cs" />
+    <Compile Include="UnitOfWork\Mappings\TaskEntityTypeConfiguration.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201704012218016_CreatePetsCatalog.resx">
@@ -69,6 +75,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201704020027197_ChangeGenderLength.resx">
       <DependentUpon>201704020027197_ChangeGenderLength.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704020226424_AddPetTasks.resx">
+      <DependentUpon>201704020226424_AddPetTasks.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -1,0 +1,26 @@
+﻿@model VetPet.Domain.PetModule.Aggregate.PetAgg.PetTask
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryval")
+
+@{
+    var petId = Guid.Parse(ViewBag.PetId.ToString());
+}
+
+<div class="well">
+    <div class="row">
+
+        <div class="col-md-8">
+            @using (Html.BeginForm("Edit", "PetTasks", new { petId = petId }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+
+                <fieldset>
+                    <legend>Editar tarea</legend>
+
+                    @Html.Partial("_form")
+                </fieldset>
+            }
+        </div>
+    </div>
+</div>

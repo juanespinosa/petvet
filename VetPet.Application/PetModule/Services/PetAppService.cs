@@ -51,6 +51,13 @@
             var persisted = _petRepository.Get(pet.Id);
             if(persisted != null)
             {
+                foreach(var task in pet.PetTasks)
+                {
+                    if (task.IsTransient())
+                    {
+                        task.GenerateNewIdentity();
+                    }
+                }
                 _petRepository.Merge(persisted, pet);
                 _petRepository.UnitOfWork.Commit();
             }

@@ -1,0 +1,34 @@
+﻿@model VetPet.Domain.PetModule.Aggregate.PetAgg.PetTask
+
+@Html.HiddenFor(model => model.Id)
+
+<div class="form-group">
+    @Html.LabelFor(model => model.Task, htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.DropDownList("TaskId", new SelectList((List<SelectListItem>)ViewBag.Tasks, "Value", "Text", ((List<SelectListItem>)ViewBag.Tasks).Where(t => t.Selected).Select(t => t.Value).FirstOrDefault()), "Seleccione una tarea", new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Task, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+<div class="form-group">
+    @Html.LabelFor(model => model.DateTime, htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.DateTime, new { htmlAttributes = new { @class = "form-control", type = "datetime-local" } })
+        @Html.ValidationMessageFor(model => model.DateTime, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+<div class="form-group">
+    @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+<div class="form-group">
+    <div class="col-md-offset-2 col-md-10">
+        <input type="submit" value="Guardar" class="btn btn-primary" />
+        @Html.ActionLink("Cancelar", "Index", new { }, new { @class = "btn btn-default" })
+    </div>
+</div>

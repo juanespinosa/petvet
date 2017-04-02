@@ -41,7 +41,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="PetModule\Services\IPetAppService.cs" />
+    <Compile Include="PetModule\Services\ITaskAppService.cs" />
     <Compile Include="PetModule\Services\PetAppService.cs" />
+    <Compile Include="PetModule\Services\TaskAppService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

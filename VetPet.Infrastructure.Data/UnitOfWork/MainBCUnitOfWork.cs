@@ -10,6 +10,7 @@
     using Seedwork;
     using Domain.PetModule.Aggregate.PetAgg;
     using Mappings;
+    using Domain.PetModule.Aggregate.TaskAgg;
 
     public class MainBCUnitOfWork
         : DbContext, IQueryableUnitOfWork
@@ -31,6 +32,30 @@
                     _pets = base.Set<Pet>();
 
                 return _pets;
+            }
+        }
+
+        IDbSet<PetTask> _petTasks;
+        public IDbSet<PetTask> PetTasks
+        {
+            get
+            {
+                if (_petTasks == null)
+                    _petTasks = base.Set<PetTask>();
+
+                return _petTasks;
+            }
+        }
+
+        IDbSet<Task> _tasks;
+        public IDbSet<Task> Tasks
+        {
+            get
+            {
+                if (_tasks == null)
+                    _tasks = base.Set<Task>();
+
+                return _tasks;
             }
         }
 
@@ -128,6 +153,8 @@
 
             //Add entity configurations in a structured way using 'TypeConfiguration’ classes
             modelBuilder.Configurations.Add(new PetEntityTypeConfiguration());
+            modelBuilder.Configurations.Add(new PetTaskEntityTypeConfiguration());
+            modelBuilder.Configurations.Add(new TaskEntityTypeConfiguration());
         }
         #endregion
     }

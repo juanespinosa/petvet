@@ -66,10 +66,16 @@ namespace VetPet.App_Start
             container.RegisterType<
                 Application.PetModule.Services.IPetAppService
                 , Application.PetModule.Services.PetAppService>();
+            container.RegisterType<
+                Application.PetModule.Services.ITaskAppService
+                , Application.PetModule.Services.TaskAppService>();
 
             container.RegisterType<
                 Domain.PetModule.Aggregate.PetAgg.IPetRepository,
                 Infrastructure.Data.PetModule.PetRepository>();
+            container.RegisterType<
+                Domain.PetModule.Aggregate.TaskAgg.ITaskRepository,
+                Infrastructure.Data.PetModule.TaskRepository>();
         }
     }
 }

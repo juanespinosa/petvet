@@ -29,6 +29,26 @@
             Property(p => p.Picture)
                 .IsOptional()
                 .IsMaxLength();
+
+            HasMany(p => p.PetTasks)
+                .WithRequired();
+        }
+    }
+
+    class PetTaskEntityTypeConfiguration
+        : EntityTypeConfiguration<PetTask>
+    {
+        public PetTaskEntityTypeConfiguration()
+        {
+            HasKey(pt => pt.Id);
+
+            Property(pt => pt.DateTime)
+                .IsRequired();
+            Property(pt => pt.Price)
+                .IsOptional();
+
+            HasRequired(pt => pt.Task)
+                .WithMany();
         }
     }
 }

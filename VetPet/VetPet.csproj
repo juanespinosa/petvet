@@ -207,6 +207,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PetsController.cs" />
+    <Compile Include="Controllers\PetTasksController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -288,6 +289,11 @@
     <Content Include="Views\Pets\Edit.cshtml" />
     <Content Include="Views\Pets\Delete.cshtml" />
     <Content Include="Views\Pets\_form.cshtml" />
+    <Content Include="Views\PetTasks\Index.cshtml" />
+    <Content Include="Views\PetTasks\Create.cshtml" />
+    <Content Include="Views\PetTasks\_form.cshtml" />
+    <Content Include="Views\PetTasks\Edit.cshtml" />
+    <Content Include="Views\PetTasks\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
