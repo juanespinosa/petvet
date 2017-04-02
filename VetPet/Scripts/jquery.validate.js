@@ -229,8 +229,8 @@ $.extend($.validator, {
 		messages: {},
 		groups: {},
 		rules: {},
-		errorClass: "error",
-		validClass: "valid",
+		errorClass: "has-error",
+		validClass: "has-success",
 		errorElement: "label",
 		focusInvalid: true,
 		errorContainer: $([]),
@@ -272,17 +272,17 @@ $.extend($.validator, {
 			}
 		},
 		highlight: function( element, errorClass, validClass ) {
-			if ( element.type === "radio" ) {
+		    if (element.type === "radio" || element.type === "checkbox") {
 				this.findByName(element.name).addClass(errorClass).removeClass(validClass);
 			} else {
-				$(element).addClass(errorClass).removeClass(validClass);
+				$(element).closest(".form-group").addClass(errorClass).removeClass(validClass);
 			}
 		},
 		unhighlight: function( element, errorClass, validClass ) {
-			if ( element.type === "radio" ) {
+		    if (element.type === "radio" || element.type === "checkbox") {
 				this.findByName(element.name).removeClass(errorClass).addClass(validClass);
 			} else {
-				$(element).removeClass(errorClass).addClass(validClass);
+			    $(element).closest(".form-group").removeClass(errorClass).addClass(validClass);
 			}
 		}
 	},

@@ -1,0 +1,23 @@
+﻿@model VetPet.Domain.PetModule.Aggregate.PetAgg.Pet
+@{
+    ViewBag.Title = "Editar mascota";
+}
+<div class="well">
+    <div class="row">
+
+        <div class="col-md-8">
+            @using (Html.BeginForm("Edit", "Pets", new { id = Model.Id }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+
+                <fieldset>
+                    <legend>Crear una nueva mascota</legend>
+                    @Html.HiddenFor(model => model.Id)
+                    @Html.Partial("_form")
+
+                </fieldset>
+            }
+
+        </div>
+    </div>
+</div>

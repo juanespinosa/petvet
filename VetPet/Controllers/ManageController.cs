@@ -63,15 +63,10 @@ namespace VetPet.Controllers
                 : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
                 : "";
 
-            var userId = User.Identity.GetUserId();
-            var model = new IndexViewModel
-            {
-                HasPassword = HasPassword(),
-                PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
-                TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
-                Logins = await UserManager.GetLoginsAsync(userId),
-                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
-            };
+            var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+            var model = new UserViewModel();
+            user.MapTo(model);
+
             return View(model);
         }
 
@@ -128,6 +123,28 @@ namespace VetPet.Controllers
                 await UserManager.SmsService.SendAsync(message);
             }
             return RedirectToAction("VerifyPhoneNumber", new { PhoneNumber = model.Number });
+        }
+
+        public async Task<ActionResult> EditDetails()
+        {
+            var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+            var model = new UserViewModel();
+            user.MapTo(model);
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> EditDetails(UserViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+            model.MapTo(user);
+            await UserManager.UpdateAsync(user);
+            return RedirectToAction("Index");
         }
 
         //

@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
+using System;
 
 namespace VetPet.Models
 {
@@ -13,7 +14,56 @@ namespace VetPet.Models
         public bool TwoFactor { get; set; }
         public bool BrowserRemembered { get; set; }
     }
-
+    public class UserViewModel
+    {
+        [Display(Name = "Cédula")]
+        [Required]
+        public string UserName { get; set; }
+        [Display(Name = "Correo electrónico")]
+        [EmailAddress]
+        public string Email { get; set; }
+        [Display(Name = "Número telefónico")]
+        public string PhoneNumber { get; set; }
+        [Display(Name = "Nombres")]
+        public string FirstName { get; set; }
+        [Display(Name = "Apellidos")]
+        public string LastName { get; set; }
+        [Display(Name = "Dirección")]
+        public string Address { get; set; }
+        [Display(Name = "Fecha de nacimiento")]
+        public DateTime? BirthDate { get; set; }
+        [Display(Name = "Género")]
+        public string Gender { get; set; }
+        [Display(Name = "Tienda")]
+        public string Store { get; set; }
+        public string FullName
+        {
+            get
+            {
+                return string.Format("{0} {1}", FirstName, LastName);
+            }
+        }
+        public int Age
+        {
+            get
+            {
+                if (!BirthDate.HasValue) return 0;
+                var age = DateTime.Today.Year - BirthDate.Value.Year;
+                return DateTime.Today < BirthDate.Value.AddYears(age) ? age - 1 : age;
+            }
+        }
+        public void MapTo(ApplicationUser toMap)
+        {
+            toMap.Email = Email;
+            toMap.PhoneNumber = PhoneNumber;
+            toMap.FirstName = FirstName;
+            toMap.LastName = LastName;
+            toMap.Address = Address;
+            toMap.BirthDate = BirthDate;
+            toMap.Gender = Gender;
+            toMap.Store = Store;
+        }
+    }
     public class ManageLoginsViewModel
     {
         public IList<UserLoginInfo> CurrentLogins { get; set; }

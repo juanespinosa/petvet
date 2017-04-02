@@ -1,0 +1,27 @@
+﻿@model VetPet.Domain.PetModule.Aggregate.PetAgg.Pet
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryval")
+
+@{
+    ViewBag.Title = "Crear nueva mascota";
+}
+<div class="well">
+    <div class="row">
+
+        <div class="col-md-8">
+            @using (Html.BeginForm("Create", "Pets", new { }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+
+                <fieldset>
+                    <legend>Crear una nueva mascota</legend>
+                    
+                    @Html.Partial("_form")
+
+                </fieldset>
+            }
+
+        </div>
+    </div>
+</div>
