@@ -12,5 +12,7 @@
         : IRepository<Pet>
     {
         IEnumerable<Pet> GetPagedByCustomer(int pageIndex, int pageCount, Guid customerId);
+
+        IEnumerable<Pet> GetPagedByApi(int pageIndex, int pageCount, string name, string task);
     }
 }

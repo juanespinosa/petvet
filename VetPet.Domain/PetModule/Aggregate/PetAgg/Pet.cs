@@ -46,6 +46,18 @@
             }
         }
 
+        public string CustomerName { get; set; }
+        public int Age
+        {
+            get
+            {
+                if (!BirthDate.HasValue) return 0;
+                var age = DateTime.Today.Year - BirthDate.Value.Year;
+                return DateTime.Today < BirthDate.Value.AddYears(age) ? age - 1 : age;
+            }
+        }
+
+
         public CurrentTaskInfo GetTasksInfo()
         {
             var current = new CurrentTaskInfo();

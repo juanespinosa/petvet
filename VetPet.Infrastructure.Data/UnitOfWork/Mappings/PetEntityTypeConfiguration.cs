@@ -30,6 +30,9 @@
                 .IsOptional()
                 .IsMaxLength();
 
+            Ignore(p => p.CustomerName);
+            Ignore(p => p.Age);
+
             HasMany(p => p.PetTasks)
                 .WithRequired();
         }

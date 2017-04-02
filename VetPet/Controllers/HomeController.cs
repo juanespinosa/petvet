@@ -8,6 +8,7 @@ using VetPet.Domain.PetModule.Aggregate.PetAgg;
 
 namespace VetPet.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         readonly IPetRepository _petRepository;

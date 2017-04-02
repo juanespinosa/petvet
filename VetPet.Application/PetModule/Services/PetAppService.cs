@@ -36,10 +36,21 @@
                 .ToList();
         }
 
+        public List<Pet> FindPets(string name, string task, int index = 1, int count = 10)
+        {
+            //var result = _petRepository.GetPagedByApi(index, count, name, task).ToList();
+            var result = _petRepository
+                .AllMatching(PetSpecifications.ByApi(name, task))
+                .OrderBy(p => p.CustomerName)
+                          .Skip(count * (index - 1))
+                          .Take(count);
+            return result.ToList();
+        }
+
         public void RemovePet(Guid petId)
         {
             var pet = _petRepository.Get(petId);
-            if(pet != null)
+            if (pet != null)
             {
                 _petRepository.Remove(pet);
                 _petRepository.UnitOfWork.Commit();
@@ -49,9 +60,9 @@
         public void UpdatePet(Pet pet)
         {
             var persisted = _petRepository.Get(pet.Id);
-            if(persisted != null)
+            if (persisted != null)
             {
-                foreach(var task in pet.PetTasks)
+                foreach (var task in pet.PetTasks)
                 {
                     if (task.IsTransient())
                     {

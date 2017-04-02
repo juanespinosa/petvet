@@ -5,14 +5,21 @@
     using System.Web.Mvc;
     using Application.PetModule.Services;
     using Domain.PetModule.Aggregate.PetAgg;
+    using System.Collections.Generic;
+    using Models;
+    using System.Web.Security;
 
+    [Authorize]
     public class PetsController : Controller
     {
         readonly IPetAppService _petAppService;
+        private ApplicationUserManager _userManager;
 
-        public PetsController(IPetAppService petAppService)
+        public PetsController(IPetAppService petAppService,
+            ApplicationUserManager userManager)
         {
             _petAppService = petAppService;
+            _userManager = userManager;
         }
 
         // GET: Pets
@@ -107,6 +114,34 @@
                 return View();
             }
         }
+
+        [AllowAnonymous]
+        public ActionResult Tasks(string name, string task, int count = 10, int page = 1)
+        {
+            var result = new List<object>();
+
+            var pets = _petAppService.FindPets(name, task, page, count);
+
+            foreach (var pet in pets)
+            {
+                foreach(var petTask in pet.PetTasks)
+                {
+                    result.Add(new
+                    {
+                        TipoTarea = petTask.Task.Type,
+                        NombreTarea = petTask.Task.Name,
+                        NombreCompleto = pet.CustomerId,
+                        Edad = pet.Age,
+                        NombreMascota = pet.Name,
+                        Raza = pet.Breed,
+                        FechaTarea = petTask.DateTime.ToString()
+                    });
+                }
+            }
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
 
         private Guid UserId()
         {

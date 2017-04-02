@@ -16,5 +16,7 @@
         void RemovePet(Guid petId);
 
         List<Pet> FindPets(int index, int count, Guid customerId);
+
+        List<Pet> FindPets(string name, string task, int index, int count);
     }
 }
