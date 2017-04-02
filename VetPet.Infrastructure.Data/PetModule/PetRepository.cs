@@ -6,6 +6,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Data.Entity;
 
     public class PetRepository
         : Repository<Pet>, IPetRepository
@@ -18,6 +19,8 @@
             var currentUOW = UnitOfWork as MainBCUnitOfWork;
 
             return currentUOW.Pets
+                                .Include("PetTasks")
+                                .Include("PetTasks.Task")
                                 .Where(p => p.CustomerId.Equals(customerId))
                                 .OrderBy(p => p.NickName)
                                 .Skip(pageIndex * pageCount)

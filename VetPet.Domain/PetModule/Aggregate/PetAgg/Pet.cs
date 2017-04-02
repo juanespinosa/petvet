@@ -4,6 +4,8 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.Linq;
+    using TaskAgg;
 
     public class Pet : Entity
     {
@@ -43,5 +45,32 @@
                 _petTasks = new HashSet<PetTask>(value);
             }
         }
+
+        public CurrentTaskInfo GetTasksInfo()
+        {
+            var current = new CurrentTaskInfo();
+
+            var tasks = PetTasks.Where(pt => pt.DateTime >= DateTime.Today && pt.DateTime < DateTime.Today.AddDays(1)).OrderBy(pt => pt.DateTime).ToList();
+            var tasksLeft = PetTasks.Where(pt => pt.DateTime >= DateTime.Now && pt.DateTime < DateTime.Today.AddDays(1)).OrderBy(pt => pt.DateTime).ToList();
+
+            current.NextTask = tasksLeft.FirstOrDefault();
+            current.TotalPrice = tasks.Sum(pt => pt.Price);
+            current.TasksDone = tasks.Count() - tasksLeft.Count();
+            current.PendingTasks = tasksLeft.Count();
+            current.PercentageTasksDone = tasks.Count() > 0 ? current.TasksDone * 100 / tasks.Count() : 100;
+
+            return current;
+        }
+    }
+
+    public class CurrentTaskInfo
+    {
+        public PetTask NextTask { get; set; }
+        public double TotalPrice { get; set; }
+
+        public int PendingTasks { get; set; }
+        public int TasksDone { get; set; }
+
+        public int PercentageTasksDone { get; set; }
     }
 }
